@@ -5,8 +5,8 @@ public class BattleMap : MonoBehaviour
 {
     protected BattleMapData data = new BattleMapData();
 
-    protected const float hexOffsetX = 1.5f;
-    protected const float hexOffsetY = 1f;
+    protected const float hexOffsetX = 1.4f;
+    protected const float hexOffsetY = 0.825f;
 
     protected Dictionary<BattleMapData.TileData, BattleMapTileView> tileViews = new Dictionary<BattleMapData.TileData, BattleMapTileView>();
 
@@ -44,11 +44,14 @@ public class BattleMap : MonoBehaviour
 
     public void AddViewForTile(BattleMapData.TileData tile)
     {
-        GameObject tileView = Instantiate(tileViewPrefab);
-        tileView.transform.SetParent(transform);
-        tileView.transform.localPosition = GetLocalHexPosition(tile.x, tile.y);
+        GameObject tileViewObject = Instantiate(tileViewPrefab);
+        tileViewObject.transform.SetParent(transform);
+        tileViewObject.transform.localPosition = GetLocalHexPosition(tile.x, tile.y);
 
-        tileViews.Add(tile, tileView.GetComponent<BattleMapTileView>());
+        BattleMapTileView tileView = tileViewObject.GetComponent<BattleMapTileView>();
+        tileView.ShowData(tile);
+
+        tileViews.Add(tile, tileView);
     }
 
     public void RemoveViewForTile(BattleMapData.TileData tile)

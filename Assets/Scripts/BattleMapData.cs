@@ -4,12 +4,21 @@ public class BattleMapData
 {
     public class TileData
     {
-        public int x, y;
+        public int x, y, height;
+        public Type tileType;
 
-        public TileData(int x, int y)
+        public TileData(int x, int y, int height, Type tileType)
         {
             this.x = x;
             this.y = y;
+            this.height = height;
+            this.tileType = tileType;
+        }
+
+        public enum Type
+        {
+            Grass,
+            Dirt
         }
     }
 
