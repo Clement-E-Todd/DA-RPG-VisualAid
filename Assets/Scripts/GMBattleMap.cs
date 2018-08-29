@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 
-public class GMBattleMap : MonoBehaviour
+public class GMBattleMap : BattleMap
 {
     private Transform cursorTransform;
 
-    const float hexOffsetX = 1.5f;
-    const float hexOffsetY = 1f;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         cursorTransform = transform.Find("EditCursor");
     }
 
@@ -20,27 +18,25 @@ public class GMBattleMap : MonoBehaviour
         int[] hexCoords = GetHexCoordNearPosition(localMousePosition);
 
         cursorTransform.position = GetLocalHexPosition(hexCoords[0], hexCoords[1]);
-    }
 
-    private Vector2 GetLocalHexPosition(int hexX, int hexY)
-    {
-        return new Vector2(
-            hexX * hexOffsetX,
-            hexY * hexOffsetY + (hexX % 2 == 0 ? hexOffsetY / 2 : 0f)
-        );
-    }
-
-    private int[] GetHexCoordNearPosition(Vector2 position)
-    {
-        int hexX = Mathf.RoundToInt(position.x / hexOffsetX);
-
-        if (hexX % 2 == 0)
+        if (Input.GetMouseButton(0))
         {
-            position.y -= hexOffsetY / 2;
+            if (data.GetTileAt(hexCoords[0], hexCoords[1]) == null)
+            {
+                BattleMapData.TileData tile = new BattleMapData.TileData(hexCoords[0], hexCoords[1]);
+                data.AddTile(tile);
+                AddViewForTile(tile);
+            }
         }
+        else if (Input.GetMouseButton(1))
+        {
+            BattleMapData.TileData tile = data.GetTileAt(hexCoords[0], hexCoords[1]);
 
-        int hexY = Mathf.RoundToInt(position.y / hexOffsetY);
-
-        return new int[] { hexX, hexY };
+            if (tile != null)
+            {
+                RemoveViewForTile(tile);
+                data.RemoveTileAt(hexCoords[0], hexCoords[1]);
+            }
+        }
     }
 }
