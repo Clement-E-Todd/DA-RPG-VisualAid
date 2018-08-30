@@ -44,13 +44,13 @@ public class BattleMapTileView : MonoBehaviour
         switch (tileType)
         {
             case BattleMapData.TileData.Type.Grass:
-                topSprite = Resources.Load<Sprite>("Sprites/Hex" + slope + "_Grass");
-                columnSprite = Resources.Load<Sprite>("Sprites/Column_Dirt");
+                topSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Hex" + slope + "_Grass");
+                columnSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Column_Dirt");
                 break;
 
             case BattleMapData.TileData.Type.Dirt:
-                topSprite = Resources.Load<Sprite>("Sprites/Hex" + slope + "_Grass");
-                columnSprite = Resources.Load<Sprite>("Sprites/Column_Dirt");
+                topSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Hex" + slope + "_Grass");
+                columnSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Column_Dirt");
                 break;
         }
     }
