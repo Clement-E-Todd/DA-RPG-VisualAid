@@ -16,7 +16,7 @@ public class BattleMapTileView : MonoBehaviour
             columnPrefab = Resources.Load<GameObject>("Prefabs/TileColumn");
         }
 
-        LoadSpritesForTile(data.tileType);
+        LoadSpritesForTile(data.tileType, data.slope);
 
         Transform topTransform = transform.Find("Top");
         topTransform.localPosition = new Vector3(0, columnHeight * data.height, 0);
@@ -39,17 +39,17 @@ public class BattleMapTileView : MonoBehaviour
         }
     }
 
-    private void LoadSpritesForTile(BattleMapData.TileData.Type tileType)
+    private void LoadSpritesForTile(BattleMapData.TileData.Type tileType, int slope)
     {
         switch (tileType)
         {
             case BattleMapData.TileData.Type.Grass:
-                topSprite = Resources.Load<Sprite>("Sprites/Hex_Grass");
+                topSprite = Resources.Load<Sprite>("Sprites/Hex" + slope + "_Grass");
                 columnSprite = Resources.Load<Sprite>("Sprites/Column_Dirt");
                 break;
 
             case BattleMapData.TileData.Type.Dirt:
-                topSprite = Resources.Load<Sprite>("Sprites/Hex_Grass");
+                topSprite = Resources.Load<Sprite>("Sprites/Hex" + slope + "_Grass");
                 columnSprite = Resources.Load<Sprite>("Sprites/Column_Dirt");
                 break;
         }

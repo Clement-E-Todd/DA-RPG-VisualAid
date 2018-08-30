@@ -4,15 +4,16 @@ public class BattleMapData
 {
     public class TileData
     {
-        public int x, y, height;
+        public int x, y, height, slope;
         public Type tileType;
 
-        public TileData(int x, int y, int height, Type tileType)
+        public TileData(int x, int y, int height, Type tileType, int slope)
         {
             this.x = x;
             this.y = y;
             this.height = height;
             this.tileType = tileType;
+            this.slope = slope;
         }
 
         public enum Type

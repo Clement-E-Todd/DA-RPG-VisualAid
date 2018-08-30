@@ -77,7 +77,7 @@ public class GMBattleMap : BattleMap
         {
             if (data.GetTileAt(hexCoords[0], hexCoords[1]) == null)
             {
-                BattleMapData.TileData tile = new BattleMapData.TileData(hexCoords[0], hexCoords[1], cursorHeight, BattleMapData.TileData.Type.Grass);
+                BattleMapData.TileData tile = new BattleMapData.TileData(hexCoords[0], hexCoords[1], cursorHeight, BattleMapData.TileData.Type.Grass, 0);
                 data.AddTile(tile);
                 AddViewForTile(tile);
             }
