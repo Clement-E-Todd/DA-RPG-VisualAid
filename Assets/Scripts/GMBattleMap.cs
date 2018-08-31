@@ -28,7 +28,8 @@ public class GMBattleMap : BattleMap
             cursorTopTransform.Find("Down-Right").gameObject,
             cursorTopTransform.Find("Down").gameObject,
             cursorTopTransform.Find("Down-Left").gameObject,
-            cursorTopTransform.Find("Up-Left").gameObject
+            cursorTopTransform.Find("Up-Left").gameObject,
+            cursorTopTransform.Find("Obstacle").gameObject
         };
 
         if (cursorColumnPrefab == null)
@@ -109,6 +110,10 @@ public class GMBattleMap : BattleMap
         else if (Input.GetKeyDown(KeyCode.U))
         {
             cursorSlopeIndex = 6;
+        }
+        else if (Input.GetKeyDown(KeyCode.Y))
+        {
+            cursorSlopeIndex = 7;
         }
 
         if (cursorSlopeIndex != previousTopSpriteIndex || !firstUpdateComplete)
