@@ -32,6 +32,7 @@ public class BattleMapTileView : MonoBehaviour
             GameObject newColumn = Instantiate(columnPrefab);
             newColumn.transform.SetParent(topTransform);
             newColumn.transform.localPosition = new Vector3(0, columnHeight * -i, 0);
+            newColumn.transform.localScale = Vector3.one;
 
             SpriteRenderer columnRenderer = newColumn.transform.Find("Sprite").GetComponent<SpriteRenderer>();
             columnRenderer.sprite = columnSprite;

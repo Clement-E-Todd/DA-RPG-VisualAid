@@ -28,16 +28,16 @@ public class BattleMap : MonoBehaviour
         );
     }
 
-    protected int[] GetHexCoordNearPosition(Vector2 position)
+    protected int[] GetHexCoordNearPosition(Vector2 localPosition)
     {
-        int hexX = Mathf.RoundToInt(position.x / hexOffsetX);
+        int hexX = Mathf.RoundToInt(localPosition.x / hexOffsetX);
 
         if (hexX % 2 == 0)
         {
-            position.y -= hexOffsetY / 2;
+            localPosition.y -= hexOffsetY / 2;
         }
 
-        int hexY = Mathf.RoundToInt(position.y / hexOffsetY);
+        int hexY = Mathf.RoundToInt(localPosition.y / hexOffsetY);
 
         return new int[] { hexX, hexY };
     }
@@ -47,6 +47,7 @@ public class BattleMap : MonoBehaviour
         GameObject tileViewObject = Instantiate(tileViewPrefab);
         tileViewObject.transform.SetParent(transform);
         tileViewObject.transform.localPosition = GetLocalHexPosition(tile.x, tile.y);
+        tileViewObject.transform.localScale = Vector3.one;
 
         BattleMapTileView tileView = tileViewObject.GetComponent<BattleMapTileView>();
         tileView.ShowData(tile);

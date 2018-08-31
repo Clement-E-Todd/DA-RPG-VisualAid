@@ -15,6 +15,11 @@ public class GMBattleMap : BattleMap
 
     GameObject[] topSpriteObjects;
 
+    Vector3 panMapStartPosition;
+    Vector3 panMouseStartPosition;
+
+    const float zoomRate = 3f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,9 +45,42 @@ public class GMBattleMap : BattleMap
 
     private void Update()
     {
+        UpdatePanAndZoom();
         UpdateCursorSettings();
         SnapCursorToMouse();
         firstUpdateComplete = true;
+    }
+
+    private void UpdatePanAndZoom()
+    {
+        if (Input.GetMouseButtonDown(2))
+        {
+            panMapStartPosition = transform.position;
+            panMouseStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        else if (Input.GetMouseButton(2))
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 difference = mousePosition - panMouseStartPosition;
+            transform.position = panMapStartPosition + difference;
+        }
+
+        if (Input.mouseScrollDelta.y != 0f)
+        {
+            Vector3 anchorWorldPositionBefore =
+                Input.mouseScrollDelta.y > 0 ?
+                Camera.main.ScreenToWorldPoint(Input.mousePosition) :
+                Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
+
+            Vector3 anchorLocalPosition = transform.InverseTransformPoint(anchorWorldPositionBefore);
+
+            float zoom = Mathf.Clamp(transform.localScale.x + Time.deltaTime * Input.mouseScrollDelta.y * zoomRate, 0.5f, 1f);
+            transform.localScale = new Vector3(zoom, zoom, zoom);
+
+            Vector3 anchorWorldPositionAfter = transform.TransformPoint(anchorLocalPosition);
+
+            transform.position += (anchorWorldPositionBefore - anchorWorldPositionAfter);
+        }
     }
 
     private void UpdateCursorSettings()
@@ -71,6 +109,7 @@ public class GMBattleMap : BattleMap
                 GameObject newColumn = Instantiate(cursorColumnPrefab);
                 newColumn.transform.SetParent(cursorTopTransform);
                 newColumn.transform.localPosition = new Vector3(0, BattleMapTileView.columnHeight * -cursorColumns.Count, 0);
+                newColumn.transform.localScale = Vector3.one;
                 cursorColumns.Add(newColumn);
             }
 
@@ -140,7 +179,7 @@ public class GMBattleMap : BattleMap
 
         int[] hexCoords = GetHexCoordNearPosition(localMousePosition);
 
-        cursorTransform.position = GetLocalHexPosition(hexCoords[0], hexCoords[1]);
+        cursorTransform.localPosition = GetLocalHexPosition(hexCoords[0], hexCoords[1]);
 
         if (Input.GetMouseButton(0))
         {
