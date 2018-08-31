@@ -49,7 +49,7 @@ public class BattleMapTileView : MonoBehaviour
                 break;
 
             case BattleMapData.TileData.Type.Dirt:
-                topSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Hex" + slope + "_Grass");
+                topSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Hex" + slope + "_Dirt");
                 columnSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Column_Dirt");
                 break;
         }
