@@ -45,6 +45,8 @@ public class BattleMap : MonoBehaviour
     public void AddViewForTile(BattleMapData.TileData tile)
     {
         GameObject tileViewObject = Instantiate(tileViewPrefab);
+        Helpers.SetLayerRecursively(tileViewObject, gameObject.layer);
+
         tileViewObject.transform.SetParent(transform);
         tileViewObject.transform.localPosition = GetLocalHexPosition(tile.x, tile.y);
         tileViewObject.transform.localScale = Vector3.one;

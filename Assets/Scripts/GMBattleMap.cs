@@ -107,6 +107,8 @@ public class GMBattleMap : BattleMap
             while (cursorColumns.Count < cursorHeight)
             {
                 GameObject newColumn = Instantiate(cursorColumnPrefab);
+                Helpers.SetLayerRecursively(newColumn, gameObject.layer);
+
                 newColumn.transform.SetParent(cursorTopTransform);
                 newColumn.transform.localPosition = new Vector3(0, BattleMapTileView.columnHeight * -cursorColumns.Count, 0);
                 newColumn.transform.localScale = Vector3.one;

@@ -30,6 +30,8 @@ public class BattleMapTileView : MonoBehaviour
         for (int i = 0; i < data.height; i++)
         {
             GameObject newColumn = Instantiate(columnPrefab);
+            Helpers.SetLayerRecursively(newColumn, gameObject.layer);
+
             newColumn.transform.SetParent(topTransform);
             newColumn.transform.localPosition = new Vector3(0, columnHeight * -i, 0);
             newColumn.transform.localScale = Vector3.one;
