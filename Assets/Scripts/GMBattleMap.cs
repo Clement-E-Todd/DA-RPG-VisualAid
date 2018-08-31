@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class GMBattleMap : BattleMap
 {
+    public BattleMap playerMap;
+
     private Transform cursorTransform;
     private Transform cursorTopTransform;
     private int cursorHeight = 1;
@@ -47,18 +49,22 @@ public class GMBattleMap : BattleMap
     {
         UpdatePanAndZoom();
         UpdateCursorSettings();
-        SnapCursorToMouse();
+        AddAndRemoveTiles();
+        SyncPlayerMapTransform();
+
         firstUpdateComplete = true;
     }
 
     private void UpdatePanAndZoom()
     {
-        if (Input.GetMouseButtonDown(2))
+        int panMouseButtonIndex = Input.GetKey(KeyCode.LeftShift) ? 0 : 2;
+
+        if (Input.GetMouseButtonDown(panMouseButtonIndex))
         {
             panMapStartPosition = transform.position;
             panMouseStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-        else if (Input.GetMouseButton(2))
+        else if (Input.GetMouseButton(panMouseButtonIndex))
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 difference = mousePosition - panMouseStartPosition;
@@ -174,7 +180,7 @@ public class GMBattleMap : BattleMap
         }
     }
 
-    private void SnapCursorToMouse()
+    private void AddAndRemoveTiles()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 localMousePosition = transform.InverseTransformPoint(mousePosition);
@@ -183,13 +189,14 @@ public class GMBattleMap : BattleMap
 
         cursorTransform.localPosition = GetLocalHexPosition(hexCoords[0], hexCoords[1]);
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !Input.GetKey(KeyCode.LeftShift))
         {
             if (data.GetTileAt(hexCoords[0], hexCoords[1]) == null)
             {
                 BattleMapData.TileData tile = new BattleMapData.TileData(hexCoords[0], hexCoords[1], cursorHeight, cursorTileType, cursorSlopeIndex);
                 data.AddTile(tile);
                 AddViewForTile(tile);
+                playerMap.AddViewForTile(tile);
             }
         }
         else if (Input.GetMouseButton(1))
@@ -199,8 +206,15 @@ public class GMBattleMap : BattleMap
             if (tile != null)
             {
                 RemoveViewForTile(tile);
+                playerMap.RemoveViewForTile(tile);
                 data.RemoveTileAt(hexCoords[0], hexCoords[1]);
             }
         }
+    }
+
+    private void SyncPlayerMapTransform()
+    {
+        playerMap.transform.localPosition = transform.localPosition;
+        playerMap.transform.localScale = transform.localScale;
     }
 }
