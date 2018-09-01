@@ -5,6 +5,14 @@ public class GMBattleMap : BattleMap
 {
     public BattleMap playerMap;
 
+    public enum Mode
+    {
+        Edit,
+        Prop,
+        Initiative
+    }
+    Mode currentMode = Mode.Prop;
+
     private Transform cursorTransform;
     private Transform cursorTopTransform;
     private int cursorHeight = 1;
@@ -20,6 +28,8 @@ public class GMBattleMap : BattleMap
     Vector3 panMapStartPosition;
     Vector3 panMouseStartPosition;
 
+    const float maxCursorDistanceX = 4.5f;
+    const float maxCursorDistanceY = 2.75f;
     const float zoomRate = 3f;
 
     protected override void Awake()
@@ -48,11 +58,35 @@ public class GMBattleMap : BattleMap
     private void Update()
     {
         UpdatePanAndZoom();
-        UpdateCursorSettings();
-        AddAndRemoveTiles();
+
+        if (currentMode == Mode.Edit)
+        {
+            UpdateCursorSettings();
+            AddAndRemoveTiles();
+        }
+        else
+        {
+            cursorTransform.gameObject.SetActive(false);
+        }
+
         SyncPlayerMapTransform();
 
         firstUpdateComplete = true;
+    }
+
+    public void SetEditMode()
+    {
+        currentMode = Mode.Edit;
+    }
+
+    public void SetPropMode()
+    {
+        currentMode = Mode.Prop;
+    }
+
+    public void SetInitiativeMode()
+    {
+        currentMode = Mode.Initiative;
     }
 
     private void UpdatePanAndZoom()
@@ -183,12 +217,24 @@ public class GMBattleMap : BattleMap
     private void AddAndRemoveTiles()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Hide and disable cursor when too far from map
+        cursorTransform.gameObject.SetActive(
+            Mathf.Abs(mousePosition.x) - transform.parent.position.x < maxCursorDistanceX &&
+            Mathf.Abs(mousePosition.y) - transform.parent.position.y < maxCursorDistanceY
+        );
+
+        if (!cursorTransform.gameObject.activeSelf)
+        {
+            return;
+        }
+
+        // Match cursor to mouse position
         Vector3 localMousePosition = transform.InverseTransformPoint(mousePosition);
-
         int[] hexCoords = GetHexCoordNearPosition(localMousePosition);
-
         cursorTransform.localPosition = GetLocalHexPosition(hexCoords[0], hexCoords[1]);
 
+        // Add tiles on left-click, remove on right-click
         if (Input.GetMouseButton(0) && !Input.GetKey(KeyCode.LeftShift))
         {
             if (data.GetTileAt(hexCoords[0], hexCoords[1]) == null)
