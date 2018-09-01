@@ -55,8 +55,10 @@ public class GMBattleMap : BattleMap
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         UpdatePanAndZoom();
 
         if (currentMode == Mode.Edit)

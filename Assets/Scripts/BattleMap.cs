@@ -12,11 +12,46 @@ public class BattleMap : MonoBehaviour
 
     private static GameObject tileViewPrefab;
 
+    public bool hidden = true;
+
     protected virtual void Awake()
     {
         if (tileViewPrefab == null)
         {
             tileViewPrefab = Resources.Load<GameObject>("Prefabs/BattleMapTile");
+        }
+    }
+
+    protected virtual void Update()
+    {
+        Vector3 destination = new Vector3(
+            hidden ? 20 : 0,
+            transform.parent.position.y,
+            transform.parent.position.z
+        );
+
+        if (Mathf.Abs(destination.x - transform.parent.position.x) > 0.01)
+        {
+            transform.parent.position = Vector3.Lerp(transform.parent.position, destination, Time.deltaTime * 4f);
+        }
+        else
+        {
+            transform.parent.position = destination;
+        }
+
+        if (hidden && transform.parent.position.x > 19)
+        {
+            transform.parent.gameObject.SetActive(false);
+        }
+    }
+
+    public void ToggleHidden()
+    {
+        hidden = !hidden;
+
+        if (!hidden && !transform.parent.gameObject.activeSelf)
+        {
+            transform.parent.gameObject.SetActive(true);
         }
     }
 
