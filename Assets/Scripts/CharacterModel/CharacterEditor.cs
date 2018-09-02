@@ -23,7 +23,7 @@ public class CharacterEditor : MonoBehaviour
     public Slider legThicknessSlider;
     public Slider legLengthSlider;
 
-    public void OnSliderValueChanged()
+    public void OnProportionSliderValueChanged()
     {
         currentModel.leg1.localScale = new Vector3(legThicknessSlider.value, 1f, 1f);
         currentModel.leg2.localScale = new Vector3(legThicknessSlider.value, 1f, 1f);
