@@ -2,14 +2,14 @@
 
 public abstract class CharacterModel : MonoBehaviour
 {
-    public Transform leg1;
-    public Transform leg2;
-    public Transform hips;
-    public Transform torso;
-    public Transform arm1;
-    public Transform arm2;
-    public Transform neck;
-    public Transform head;
+    public BodyPart leg1;
+    public BodyPart leg2;
+    public BodyPart hips;
+    public BodyPart torso;
+    public BodyPart arm1;
+    public BodyPart arm2;
+    public BodyPart neck;
+    public BodyPart head;
 
     protected abstract Color minHue { get; }
     protected abstract Color maxHue { get; }
@@ -47,39 +47,39 @@ public abstract class CharacterModel : MonoBehaviour
             skinColor = Color.Lerp(skinColor, maxDarkenedSkinColor, (0.5f - lightness) * 2f);
         }
 
-        leg1.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
-        leg2.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
-        hips.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
-        torso.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
-        arm1.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
-        arm2.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
-        neck.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
-        head.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
+        leg1.mainSprite.color = skinColor;
+        leg2.mainSprite.color = skinColor;
+        hips.mainSprite.color = skinColor;
+        torso.mainSprite.color = skinColor;
+        arm1.mainSprite.color = skinColor;
+        arm2.mainSprite.color = skinColor;
+        neck.mainSprite.color = skinColor;
+        head.mainSprite.color = skinColor;
     }
 
     public void UpdateProportions()
     {
-        leg1.localScale = new Vector3(
-            leg1.localScale.x, 1f + (legLength - 1f) * leg1LengthMultiplier, 1f
+        leg1.transform.localScale = new Vector3(
+            leg1.transform.localScale.x, 1f + (legLength - 1f) * leg1LengthMultiplier, 1f
         );
-        leg2.localScale = new Vector3(
-            leg2.localScale.x, 1f + (legLength - 1f) * leg2LengthMultiplier, 1f
-        );
-
-        arm1.localScale = new Vector3(
-            arm1.localScale.x, 1f + (armLength - 1f) * leg1LengthMultiplier, 1f
-        );
-        arm2.localScale = new Vector3(
-            arm2.localScale.x, 1f + (armLength - 1f) * leg2LengthMultiplier, 1f
+        leg2.transform.localScale = new Vector3(
+            leg2.transform.localScale.x, 1f + (legLength - 1f) * leg2LengthMultiplier, 1f
         );
 
-        leg1.localPosition = leg1TargetPosition;
-        leg2.localPosition = leg2TargetPosition;
-        hips.localPosition = hipsTargetPosition;
-        torso.localPosition = torsoTargetPosition;
-        arm1.localPosition = arm1TargetPosition;
-        arm2.localPosition = arm2TargetPosition;
-        neck.localPosition = neckTargetPosition;
-        head.localPosition = headTargetPosition;
+        arm1.transform.localScale = new Vector3(
+            arm1.transform.localScale.x, 1f + (armLength - 1f) * leg1LengthMultiplier, 1f
+        );
+        arm2.transform.localScale = new Vector3(
+            arm2.transform.localScale.x, 1f + (armLength - 1f) * leg2LengthMultiplier, 1f
+        );
+
+        leg1.transform.localPosition = leg1TargetPosition;
+        leg2.transform.localPosition = leg2TargetPosition;
+        hips.transform.localPosition = hipsTargetPosition;
+        torso.transform.localPosition = torsoTargetPosition;
+        arm1.transform.localPosition = arm1TargetPosition;
+        arm2.transform.localPosition = arm2TargetPosition;
+        neck.transform.localPosition = neckTargetPosition;
+        head.transform.localPosition = headTargetPosition;
     }
 }

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class ColorPanel : MonoBehaviour
 {
@@ -7,6 +9,8 @@ public class ColorPanel : MonoBehaviour
     public Slider greenSlider;
     public Slider blueSlider;
     public Image preview;
+
+    public EventTrigger.TriggerEvent OnValueChanged;
 
     public Color GetColor()
     {
@@ -16,5 +20,9 @@ public class ColorPanel : MonoBehaviour
     public void OnColorSliderValueChanged()
     {
         preview.color = GetColor();
+
+        BaseEventData eventData = new BaseEventData(EventSystem.current);
+        eventData.selectedObject = gameObject;
+        OnValueChanged.Invoke(eventData);
     }
 }
