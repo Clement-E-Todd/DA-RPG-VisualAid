@@ -2,6 +2,24 @@
 
 public class QunariMale : CharacterModel
 {
+    protected override Color minHue
+    {
+        get
+        {
+            return new Color(0.745f, 0.624f, 0.357f); // Good human value
+        }
+    }
+    protected override Color maxHue
+    {
+        get
+        {
+            return new Color(0.745f, 0.5f, 0.357f); // Good human value
+        }
+    }
+
+    protected override float maxLightness { get { return 0.25f; } }
+    protected override float maxDarkness { get { return 0.65f; } }
+
     protected override float leg1LengthMultiplier { get { return 1f; }}
     protected override float leg2LengthMultiplier { get { return 1.25f; } }
     protected override Vector2 leg1TargetPosition

@@ -11,6 +11,12 @@ public abstract class CharacterModel : MonoBehaviour
     public Transform neck;
     public Transform head;
 
+    protected abstract Color minHue { get; }
+    protected abstract Color maxHue { get; }
+
+    protected abstract float maxLightness { get; }
+    protected abstract float maxDarkness { get; }
+
     public float legLength = 1f;
     public float armLength = 1f;
 
@@ -25,6 +31,31 @@ public abstract class CharacterModel : MonoBehaviour
     protected abstract Vector2 arm2TargetPosition { get; }
     protected abstract Vector2 neckTargetPosition { get; }
     protected abstract Vector2 headTargetPosition { get; }
+
+    public void SetSkinTone(float hue, float lightness)
+    {
+        Color skinColor = Color.Lerp(minHue, maxHue, hue);
+
+        if (lightness > 0.5f)
+        {
+            Color maxLightenedSkinColor = Color.Lerp(skinColor, Color.white, maxLightness);
+            skinColor = Color.Lerp(skinColor, maxLightenedSkinColor, (lightness - 0.5f) * 2f);
+        }
+        else
+        {
+            Color maxDarkenedSkinColor = Color.Lerp(skinColor, Color.black, maxDarkness);
+            skinColor = Color.Lerp(skinColor, maxDarkenedSkinColor, (0.5f - lightness) * 2f);
+        }
+
+        leg1.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
+        leg2.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
+        hips.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
+        torso.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
+        arm1.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
+        arm2.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
+        neck.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
+        head.Find("Sprite").GetComponent<SpriteRenderer>().color = skinColor;
+    }
 
     public void UpdateProportions()
     {

@@ -5,6 +5,9 @@ public class CharacterEditor : MonoBehaviour
 {
     public CharacterModel currentModel;
 
+    public Slider skinHueSlider;
+    public Slider skinLightnessSlider;
+
     public Slider headWidthSlider;
     public Slider headHeightSlider;
 
@@ -22,6 +25,17 @@ public class CharacterEditor : MonoBehaviour
 
     public Slider legThicknessSlider;
     public Slider legLengthSlider;
+
+    private void Awake()
+    {
+        OnSkinSliderValueChanged();
+        OnProportionSliderValueChanged();
+    }
+
+    public void OnSkinSliderValueChanged()
+    {
+        currentModel.SetSkinTone(skinHueSlider.value, skinLightnessSlider.value);
+    }
 
     public void OnProportionSliderValueChanged()
     {
