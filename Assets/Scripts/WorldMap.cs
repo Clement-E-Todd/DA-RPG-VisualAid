@@ -63,7 +63,6 @@ public class WorldMap : MonoBehaviour
             }
 
             float zoomAmount = (transform.localScale.x - minScale) / (maxScale - minScale);
-            Debug.Log(zoomAmount);
             transform.localPosition = new Vector3(
                 Mathf.Clamp(transform.localPosition.x, -maxPanDistanceX * zoomAmount, maxPanDistanceX * zoomAmount),
                 Mathf.Clamp(transform.localPosition.y, -maxPanDistanceY * zoomAmount, maxPanDistanceY * zoomAmount),

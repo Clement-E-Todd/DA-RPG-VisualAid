@@ -1395,6 +1395,11 @@ MonoBehaviour:
   greenSlider: {fileID: 114662245569060758}
   blueSlider: {fileID: 114177362762628524}
   preview: {fileID: 114494078000703220}
+  OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &114285619935409812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1908,15 +1913,7 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Clothes
-      m_Image: {fileID: 0}
-    - m_Text: Leather Armor
-      m_Image: {fileID: 0}
-    - m_Text: Mail Armor
-      m_Image: {fileID: 0}
-    - m_Text: Plate Armor
-      m_Image: {fileID: 0}
-    - m_Text: Special
+    - m_Text: Outfit Category
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2316,7 +2313,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Clothes
+  m_Text: '-'
 --- !u!114 &114863936794547088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2510,7 +2507,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: '-'
 --- !u!222 &222025355040158530
 CanvasRenderer:
   m_ObjectHideFlags: 1
