@@ -10252,7 +10252,6 @@ MonoBehaviour:
     - spritePath: Sprites/Qunari-Male/Head-Vitaar3
       position: {x: 0.252, y: 0.142}
   outfitCategoryIndex: 0
-  eyeColorSprite: {fileID: 1565103213}
   hairSprite: {fileID: 602583769}
   hairColorPanel: {fileID: 316552417}
   hairStyles:
@@ -10261,6 +10260,8 @@ MonoBehaviour:
     - spritePath: Sprites/Qunari-Male/Hair1
       position: {x: 0.095, y: 0.479}
   hairIndexText: {fileID: 988464006}
+  eyeColorSprite: {fileID: 1565103213}
+  eyeColorPanel: {fileID: 1660033701}
   specialSprite: {fileID: 2059043263}
   specialStyles:
     name: Horns
@@ -14302,8 +14303,8 @@ MonoBehaviour:
   OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13425790}
-        m_MethodName: OnOutfitColorPanelUpdated
+      - m_Target: {fileID: 1033763593}
+        m_MethodName: OnEyeColorPanelUpdated
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

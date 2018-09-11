@@ -3,12 +3,13 @@ using UnityEngine.UI;
 
 public class HeadBodyPart : BodyPart
 {
-    public SpriteRenderer eyeColorSprite;
-
     public SpriteRenderer hairSprite;
     public ColorPanel hairColorPanel;
     public OutfitCategory hairStyles;
     public Text hairIndexText;
+
+    public SpriteRenderer eyeColorSprite;
+    public ColorPanel eyeColorPanel;
 
     public SpriteRenderer specialSprite;
     public OutfitCategory specialStyles;
@@ -77,5 +78,14 @@ public class HeadBodyPart : BodyPart
         {
             hairSprite.sprite = null;
         }
+    }
+
+    public void OnEyeColorPanelUpdated()
+    {
+        eyeColorSprite.color = new Color(
+            eyeColorPanel.redSlider.value,
+            eyeColorPanel.greenSlider.value,
+            eyeColorPanel.blueSlider.value
+        );
     }
 }
