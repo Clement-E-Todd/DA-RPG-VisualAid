@@ -48,7 +48,7 @@ public class BodyPart : MonoBehaviour
     [SerializeField]
     private int outfitCategoryIndex;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         mainSprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         outfitSprite = transform.Find("Outfit").GetComponent<SpriteRenderer>();

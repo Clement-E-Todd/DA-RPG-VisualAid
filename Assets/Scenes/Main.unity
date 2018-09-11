@@ -8759,12 +8759,12 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1033763593}
     - target: {fileID: 114954607574751230, guid: b32dbb355f30a4338818c2ee27012b26,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1033763593}
     - target: {fileID: 114305624495529038, guid: b32dbb355f30a4338818c2ee27012b26,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -10143,8 +10143,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13425790}
-        m_MethodName: IncrementOutfitIndex
+      - m_Target: {fileID: 1033763593}
+        m_MethodName: IncrementHairIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10260,6 +10260,7 @@ MonoBehaviour:
     outfits:
     - spritePath: Sprites/Qunari-Male/Hair1
       position: {x: 0.095, y: 0.479}
+  hairIndexText: {fileID: 988464006}
   specialSprite: {fileID: 2059043263}
   specialStyles:
     name: Horns
@@ -14652,8 +14653,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13425790}
-        m_MethodName: DecrementOutfitIndex
+      - m_Target: {fileID: 1033763593}
+        m_MethodName: DecrementHairIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
