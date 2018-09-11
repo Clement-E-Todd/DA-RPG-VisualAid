@@ -26,6 +26,7 @@ public class HeadBodyPart : BodyPart
         base.Awake();
 
         hairIndexText.text = (hairStyles.selectedIndex + 1).ToString();
+        OnHairIndexUpdated();
     }
 
     public void OnHairColorPanelUpdated()
@@ -46,7 +47,7 @@ public class HeadBodyPart : BodyPart
         }
         hairIndexText.text = (hairStyles.selectedIndex + 1).ToString();
 
-        OnHairIndexUIUpdated();
+        OnHairIndexUpdated();
     }
 
     public void DecrementHairIndex()
@@ -58,10 +59,10 @@ public class HeadBodyPart : BodyPart
         }
         hairIndexText.text = (hairStyles.selectedIndex + 1).ToString();
 
-        OnHairIndexUIUpdated();
+        OnHairIndexUpdated();
     }
 
-    public void OnHairIndexUIUpdated()
+    public void OnHairIndexUpdated()
     {
         if (hairStyles.outfits.Length > 0 && hairStyles.selectedIndex >= 0)
         {
