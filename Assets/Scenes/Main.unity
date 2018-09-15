@@ -1197,7 +1197,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.604
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -7145,8 +7145,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13425790}
-        m_MethodName: DecrementOutfitIndex
+      - m_Target: {fileID: 1033763593}
+        m_MethodName: DecrementSpecialIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9358,7 +9358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6666667, g: 0.6039216, b: 0.5568628, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -10252,6 +10252,8 @@ MonoBehaviour:
     - spritePath: Sprites/Qunari-Male/Head-Vitaar3
       position: {x: 0.252, y: 0.142}
   outfitCategoryIndex: 0
+  eyeColorSprite: {fileID: 1565103213}
+  eyeColorPanel: {fileID: 1660033701}
   hairSprite: {fileID: 602583769}
   hairColorPanel: {fileID: 316552417}
   hairStyles:
@@ -10260,14 +10262,14 @@ MonoBehaviour:
     - spritePath: Sprites/Qunari-Male/Hair1
       position: {x: 0.095, y: 0.479}
   hairIndexText: {fileID: 988464006}
-  eyeColorSprite: {fileID: 1565103213}
-  eyeColorPanel: {fileID: 1660033701}
   specialSprite: {fileID: 2059043263}
+  specialColorPanel: {fileID: 2048617653}
   specialStyles:
     name: Horns
     outfits:
     - spritePath: Sprites/Qunari-Male/Horns1
       position: {x: 0.178, y: 0.497}
+  specialIndexText: {fileID: 1090868583}
 --- !u!1 &1050564100
 GameObject:
   m_ObjectHideFlags: 0
@@ -11894,7 +11896,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.557
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -12197,7 +12199,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.666
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -16455,8 +16457,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13425790}
-        m_MethodName: IncrementOutfitIndex
+      - m_Target: {fileID: 1033763593}
+        m_MethodName: IncrementSpecialIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17149,8 +17151,8 @@ MonoBehaviour:
   OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13425790}
-        m_MethodName: OnOutfitColorPanelUpdated
+      - m_Target: {fileID: 1033763593}
+        m_MethodName: OnSpecialColorPanelUpdated
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17432,7 +17434,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20705
   m_Sprite: {fileID: 21300000, guid: 82d4558f4e7b44e7cb44640a83cd2c76, type: 3}
-  m_Color: {r: 0.46226418, g: 0.40089056, b: 0.36850303, a: 1}
+  m_Color: {r: 0.6666667, g: 0.6039216, b: 0.5568628, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
