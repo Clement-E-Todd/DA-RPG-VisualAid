@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
+[System.Serializable]
 public class BattleMapData
 {
+    [System.Serializable]
     public class TileData
     {
         public int x, y, height, slope;
@@ -74,6 +80,92 @@ public class BattleMapData
                     tiles.Remove(x);
                 }
             }
+        }
+    }
+
+    public TileData[] GetAllTileData()
+    {
+        List<TileData> allTileData = new List<TileData>();
+
+        foreach (Dictionary<int, TileData> column in tiles.Values)
+        {
+            foreach (TileData tile in column.Values)
+            {
+                allTileData.Add(tile);
+            }
+        }
+
+        return allTileData.ToArray();
+    }
+
+    public void Save(string mapName)
+    {
+        EnsureDirectoryExists();
+
+        string filePath = Application.persistentDataPath + "/BattleMaps/" + mapName + ".battleMap";
+        List<string> fileData = new List<string>();
+
+        TileData[] allTileData = GetAllTileData();
+        foreach (TileData tile in allTileData)
+        {
+            fileData.Add(
+                "x" + tile.x +
+                "y" + tile.y +
+                "h" + tile.height +
+                "t" + (int)tile.tileType +
+                "s" + tile.slope
+            );
+        }
+
+        File.WriteAllLines(filePath, fileData.ToArray());
+    }
+
+    public void Load(string mapName)
+    {
+        EnsureDirectoryExists();
+
+        string filePath = Application.persistentDataPath + "/BattleMaps/" + mapName + ".battleMap";
+        if (!File.Exists(filePath))
+        {
+            Debug.LogWarning("Can't load map; path does not exist: " + filePath);
+            return;
+        }
+
+        string[] fileData = File.ReadAllLines(filePath);
+
+        tiles.Clear();
+        foreach (string tileString in fileData)
+        {
+            string[] data = new string[5];
+            int dataIndex = -1;
+
+            for (int i = 0; i < tileString.Length; i++)
+            {
+                if (char.IsDigit(tileString[i]) || tileString[i] == '-')
+                {
+                    data[dataIndex] += tileString[i];
+                }
+                else
+                {
+                    dataIndex++;
+                }
+            }
+
+            AddTile(new TileData(
+                        int.Parse(data[0]),
+                        int.Parse(data[1]),
+                        int.Parse(data[2]),
+                        (TileData.Type)int.Parse(data[3]),
+                        int.Parse(data[4])));
+        }
+    }
+
+    private void EnsureDirectoryExists()
+    {
+        string directoryPath = Application.persistentDataPath + "/BattleMaps/";
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
         }
     }
 }

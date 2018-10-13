@@ -100,4 +100,21 @@ public class BattleMap : MonoBehaviour
             tileViews.Remove(tile);
         }
     }
+
+    public void RefreshTileViews()
+    {
+        // Remove all existing views
+        foreach (BattleMapTileView view in tileViews.Values)
+        {
+            Destroy(view.gameObject);
+        }
+        tileViews.Clear();
+
+        // Add a view for each tile in the map's data
+        BattleMapData.TileData[] allTileData = data.GetAllTileData();
+        foreach (BattleMapData.TileData tileData in allTileData)
+        {
+            AddViewForTile(tileData);
+        }
+    }
 }

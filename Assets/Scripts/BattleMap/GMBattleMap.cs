@@ -74,6 +74,17 @@ public class GMBattleMap : BattleMap
         SyncPlayerMapTransform();
 
         firstUpdateComplete = true;
+
+        // TEST - Save and load system (use S and L keys to test)
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            data.Save("TEST");
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            data.Load("TEST");
+            RefreshTileViews();
+        }
     }
 
     public void SetEditMode()
