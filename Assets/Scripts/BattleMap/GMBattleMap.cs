@@ -77,6 +77,22 @@ public class GMBattleMap : BattleMap
         firstUpdateComplete = true;
     }
 
+    public void Save(string mapName)
+    {
+        data.Save(mapName);
+    }
+
+    public void Load(string mapName)
+    {
+        data.Load(mapName);
+        playerMap.GetData().Load(mapName);
+
+        RefreshTileViews();
+        playerMap.RefreshTileViews();
+
+        SyncPlayerMapTransform();
+    }
+
     public void SetNoMode()
     {
         currentMode = Mode.None;

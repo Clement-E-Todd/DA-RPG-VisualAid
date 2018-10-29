@@ -38,7 +38,7 @@ public class BattleMapMenu : MonoBehaviour
 
     public void SavePanelSaveButton()
     {
-        map.GetData().Save(savePanelMapNameText.text);
+        map.Save(savePanelMapNameText.text);
         savePanel.SetActive(false);
     }
 
@@ -69,8 +69,7 @@ public class BattleMapMenu : MonoBehaviour
 
     public void LoadPanelLoadButton()
     {
-        map.GetData().Load(loadMapDropdown.captionText.text);
-        map.RefreshTileViews();
+        map.Load(loadMapDropdown.captionText.text);
         loadPanel.SetActive(false);
     }
 
