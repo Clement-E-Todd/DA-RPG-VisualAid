@@ -7,11 +7,12 @@ public class GMBattleMap : BattleMap
 
     public enum Mode
     {
+        None,
         Edit,
         Prop,
         Initiative
     }
-    Mode currentMode = Mode.Prop;
+    public Mode currentMode { get; private set; }
 
     private Transform cursorTransform;
     private Transform cursorTopTransform;
@@ -74,32 +75,30 @@ public class GMBattleMap : BattleMap
         SyncPlayerMapTransform();
 
         firstUpdateComplete = true;
+    }
 
-        // TEST - Save and load system (use S and L keys to test)
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            data.Save("TEST");
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            data.Load("TEST");
-            RefreshTileViews();
-        }
+    public void SetNoMode()
+    {
+        currentMode = Mode.None;
+        FindObjectOfType<BattleMapMenu>().OnModeSelected();
     }
 
     public void SetEditMode()
     {
         currentMode = Mode.Edit;
+        FindObjectOfType<BattleMapMenu>().OnModeSelected();
     }
 
     public void SetPropMode()
     {
         currentMode = Mode.Prop;
+        FindObjectOfType<BattleMapMenu>().OnModeSelected();
     }
 
     public void SetInitiativeMode()
     {
         currentMode = Mode.Initiative;
+        FindObjectOfType<BattleMapMenu>().OnModeSelected();
     }
 
     private void UpdatePanAndZoom()

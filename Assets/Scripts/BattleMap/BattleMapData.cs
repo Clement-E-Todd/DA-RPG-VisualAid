@@ -125,6 +125,7 @@ public class BattleMapData
         EnsureDirectoryExists();
 
         string filePath = Application.persistentDataPath + "/BattleMaps/" + mapName + ".battleMap";
+
         if (!File.Exists(filePath))
         {
             Debug.LogWarning("Can't load map; path does not exist: " + filePath);

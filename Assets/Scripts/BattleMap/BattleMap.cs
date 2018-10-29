@@ -4,6 +4,10 @@ using System.Collections.Generic;
 public class BattleMap : MonoBehaviour
 {
     protected BattleMapData data = new BattleMapData();
+    public BattleMapData GetData()
+    {
+        return data;
+    }
 
     protected const float hexOffsetX = 1.4f;
     protected const float hexOffsetY = 0.825f;
