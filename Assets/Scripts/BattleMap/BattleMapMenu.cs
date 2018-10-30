@@ -16,9 +16,9 @@ public class BattleMapMenu : MonoBehaviour
 
     public Dropdown loadMapDropdown;
 
+    public GameObject showHideButton;
     public GameObject editModeButton;
     public GameObject propModeButton;
-    public GameObject initiativeModeButton;
 
     public Text savePanelMapNameText;
 
@@ -26,6 +26,7 @@ public class BattleMapMenu : MonoBehaviour
     {
         playerMap.ToggleHidden();
         showPlayerMapText.text = playerMap.hidden ? "Show Map To Players" : "Hide Map From Players";
+        showHideButton.GetComponent<Image>().color = playerMap.hidden ? Color.yellow : Color.white;
     }
 
     public void ShowSavePanelButton()
@@ -82,7 +83,6 @@ public class BattleMapMenu : MonoBehaviour
     {
         editModeButton.GetComponent<Image>().color = map.currentMode == GMBattleMap.Mode.Edit ? Color.cyan : Color.white;
         propModeButton.GetComponent<Image>().color = map.currentMode == GMBattleMap.Mode.Prop ? Color.cyan : Color.white;
-        initiativeModeButton.GetComponent<Image>().color = map.currentMode == GMBattleMap.Mode.Initiative ? Color.cyan : Color.white;
 
         savePanel.SetActive(false);
         loadPanel.SetActive(false);

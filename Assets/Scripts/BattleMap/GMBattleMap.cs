@@ -9,8 +9,7 @@ public class GMBattleMap : BattleMap
     {
         None,
         Edit,
-        Prop,
-        Initiative
+        Prop
     }
     public Mode currentMode { get; private set; }
 
@@ -108,12 +107,6 @@ public class GMBattleMap : BattleMap
     public void SetPropMode()
     {
         currentMode = Mode.Prop;
-        FindObjectOfType<BattleMapMenu>().OnModeSelected();
-    }
-
-    public void SetInitiativeMode()
-    {
-        currentMode = Mode.Initiative;
         FindObjectOfType<BattleMapMenu>().OnModeSelected();
     }
 
