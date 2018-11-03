@@ -29,10 +29,23 @@ public class WorldMap : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        transform.position = new Vector3(
+            PlayerPrefs.GetFloat("WorldMapX", 0f),
+            PlayerPrefs.GetFloat("WorldMapY", 0f),
+            0);
+
+        float zoom = PlayerPrefs.GetFloat("WorldMapScale", 0.35f);
+        transform.localScale = new Vector3(zoom, zoom, zoom);
+    }
+
     private void Update()
     {
         if (CanInteract)
         {
+            bool shouldSaveTransform = false;
+
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(2))
             {
                 panMapStartPosition = transform.position;
@@ -43,6 +56,7 @@ public class WorldMap : MonoBehaviour
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3 difference = mousePosition - panMouseStartPosition;
                 transform.position = panMapStartPosition + difference;
+                shouldSaveTransform = true;
             }
 
             if (Input.mouseScrollDelta.y != 0f)
@@ -60,6 +74,8 @@ public class WorldMap : MonoBehaviour
                 Vector3 anchorWorldPositionAfter = transform.TransformPoint(anchorLocalPosition);
 
                 transform.position += (anchorWorldPositionBefore - anchorWorldPositionAfter);
+
+                shouldSaveTransform = true;
             }
 
             float zoomAmount = (transform.localScale.x - minScale) / (maxScale - minScale);
@@ -67,6 +83,13 @@ public class WorldMap : MonoBehaviour
                 Mathf.Clamp(transform.localPosition.x, -maxPanDistanceX * zoomAmount, maxPanDistanceX * zoomAmount),
                 Mathf.Clamp(transform.localPosition.y, -maxPanDistanceY * zoomAmount, maxPanDistanceY * zoomAmount),
                 transform.localPosition.z);
+
+            if (shouldSaveTransform)
+            {
+                PlayerPrefs.SetFloat("WorldMapX", transform.position.x);
+                PlayerPrefs.SetFloat("WorldMapY", transform.position.y);
+                PlayerPrefs.SetFloat("WorldMapScale", transform.localScale.x);
+            }
         }
         else
         {
