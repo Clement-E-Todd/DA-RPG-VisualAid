@@ -7,6 +7,8 @@ public class BattleMapElement : MonoBehaviour
     private BattleMap map;
     private SpriteRenderer spriteRenderer;
 
+    public float alphaMultiplier = 1.0f;
+
     float innerFadeDistanceX = 4.25f;
     float outerFadeDistanceX = 4.75f;
 
@@ -47,7 +49,7 @@ public class BattleMapElement : MonoBehaviour
             float alphaY = 1 - Mathf.Clamp01((Mathf.Abs(mapPos.y) - innerFadeDistanceY) / (outerFadeDistanceY - innerFadeDistanceY));
 
             Color color = spriteRenderer.color;
-            color.a = Mathf.Min(alphaX, alphaY);
+            color.a = Mathf.Min(alphaX, alphaY) * alphaMultiplier;
             spriteRenderer.color = color;
         }
     }

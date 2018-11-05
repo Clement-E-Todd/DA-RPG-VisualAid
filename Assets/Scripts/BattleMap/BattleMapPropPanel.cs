@@ -6,6 +6,7 @@ using System.Linq;
 public class BattleMapPropPanel : MonoBehaviour
 {
     public Text selectedPropNameText;
+    public Toggle visibleToggle;
 
     public Dropdown addMenuCategoryDropdown;
     public Dropdown addMenuPropDropdown;
@@ -51,15 +52,30 @@ public class BattleMapPropPanel : MonoBehaviour
         OnAddMenuCategoryChanged();
     }
 
-    private void Update()
-    {
-        selectedPropNameText.text = BattleMapProp.selectedProp ? BattleMapProp.selectedProp.name : "NONE";
-    }
-
     public void OnAddMenuCategoryChanged()
     {
         addMenuPropDropdown.ClearOptions();
         addMenuPropDropdown.AddOptions(addMenuOptions[addMenuCategoryDropdown.captionText.text].Keys.ToArray().ToList());
         addMenuPropDropdown.value = 0;
+    }
+
+    public void OnPropSelected()
+    {
+        if (!BattleMapProp.selectedProp)
+        {
+            selectedPropNameText.text = "NONE";
+            return;
+        }
+
+        selectedPropNameText.text = BattleMapProp.selectedProp.name;
+        visibleToggle.isOn = BattleMapProp.selectedProp.visibleToPlayers;
+    }
+
+    public void OnVisibleToggled()
+    {
+        if (BattleMapProp.selectedProp)
+        {
+            BattleMapProp.selectedProp.SetVisibleToPlayers(visibleToggle.isOn);
+        }
     }
 }
