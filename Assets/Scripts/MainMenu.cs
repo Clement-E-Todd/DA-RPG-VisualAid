@@ -2,12 +2,17 @@
 
 public class MainMenu : MonoBehaviour
 {
-    public BattleMap battleMap;
+    public GMBattleMap battleMap;
     public CharacterEditor characterEditor;
 
     public void ToggleBattleMap()
     {
         battleMap.ToggleHidden();
+
+        if (!battleMap.playerMap.hidden)
+        {
+            battleMap.playerMap.ToggleHidden();
+        }
     }
 
     public void ToggleCharacterEditor()
