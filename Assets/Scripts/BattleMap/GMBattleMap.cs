@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class GMBattleMap : BattleMap
 {
+    public static GMBattleMap currentInstance;
+
     public BattleMap playerMap;
 
     public enum Mode
@@ -33,6 +35,8 @@ public class GMBattleMap : BattleMap
 
     protected override void Awake()
     {
+        currentInstance = this;
+
         base.Awake();
         cursorTransform = transform.Find("Cursor");
         cursorTopTransform = cursorTransform.Find("Top");

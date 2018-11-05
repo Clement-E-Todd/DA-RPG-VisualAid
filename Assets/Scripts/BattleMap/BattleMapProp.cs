@@ -25,7 +25,7 @@ public class BattleMapProp : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (spriteRenderer.color.a < 0.25f)
+        if (GMBattleMap.currentInstance.currentMode != GMBattleMap.Mode.Prop || spriteRenderer.color.a < 0.25f)
         {
             return;
         }
@@ -37,10 +37,10 @@ public class BattleMapProp : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (selectedProp != this)
+        if (GMBattleMap.currentInstance.currentMode != GMBattleMap.Mode.Prop || selectedProp != this)
         {
             return;
         }
-        transform.position = propDragStartPos + (Input.mousePosition - mouseDragStartPos) / 128f;
+        transform.position = propDragStartPos + (Input.mousePosition - mouseDragStartPos) / 96f;
     }
 }
