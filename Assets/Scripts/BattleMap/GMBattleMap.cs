@@ -92,6 +92,15 @@ public class GMBattleMap : BattleMap
         SyncPlayerMapTransform();
     }
 
+    public void Clear()
+    {
+        data.Clear();
+        playerMap.GetData().Clear();
+
+        RefreshTileViews();
+        playerMap.RefreshTileViews();
+    }
+
     public void SetNoMode()
     {
         currentMode = Mode.None;

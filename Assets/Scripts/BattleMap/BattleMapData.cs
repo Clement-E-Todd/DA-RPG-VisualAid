@@ -161,6 +161,11 @@ public class BattleMapData
         }
     }
 
+    public void Clear()
+    {
+        tiles.Clear();
+    }
+
     private void EnsureDirectoryExists()
     {
         string directoryPath = Application.persistentDataPath + "/BattleMaps/";

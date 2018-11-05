@@ -13,6 +13,7 @@ public class BattleMapMenu : MonoBehaviour
 
     public GameObject savePanel;
     public GameObject loadPanel;
+    public GameObject clearPanel;
 
     public Dropdown loadMapDropdown;
 
@@ -35,6 +36,7 @@ public class BattleMapMenu : MonoBehaviour
 
         savePanel.SetActive(true);
         loadPanel.SetActive(false);
+        clearPanel.SetActive(false);
     }
 
     public void SavePanelSaveButton()
@@ -66,6 +68,7 @@ public class BattleMapMenu : MonoBehaviour
 
         loadPanel.SetActive(true);
         savePanel.SetActive(false);
+        clearPanel.SetActive(false);
     }
 
     public void LoadPanelLoadButton()
@@ -77,6 +80,26 @@ public class BattleMapMenu : MonoBehaviour
     public void LoadPanelCancelButton()
     {
         loadPanel.SetActive(false);
+    }
+
+    public void ShowClearPanelButton()
+    {
+        map.SetNoMode();
+
+        savePanel.SetActive(false);
+        loadPanel.SetActive(false);
+        clearPanel.SetActive(true);
+    }
+
+    public void ClearPanelClearButton()
+    {
+        map.Clear();
+        clearPanel.SetActive(false);
+    }
+
+    public void ClearPanelCancelButton()
+    {
+        clearPanel.SetActive(false);
     }
 
     public void OnModeSelected()
