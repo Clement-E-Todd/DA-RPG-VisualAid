@@ -8516,7 +8516,7 @@ MonoBehaviour:
   showHideButton: {fileID: 1478445837}
   editModeButton: {fileID: 107517160}
   propModeButton: {fileID: 1433126433}
-  savePanelMapNameText: {fileID: 2014153950}
+  savePanelMapNameText: {fileID: 954800089}
 --- !u!1 &768169000
 GameObject:
   m_ObjectHideFlags: 0

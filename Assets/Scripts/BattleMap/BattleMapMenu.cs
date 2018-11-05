@@ -21,7 +21,7 @@ public class BattleMapMenu : MonoBehaviour
     public GameObject editModeButton;
     public GameObject propModeButton;
 
-    public Text savePanelMapNameText;
+    public InputField savePanelMapNameText;
 
     public void TogglePlayerMapButton()
     {
@@ -75,6 +75,7 @@ public class BattleMapMenu : MonoBehaviour
     {
         map.Load(loadMapDropdown.captionText.text);
         loadPanel.SetActive(false);
+        savePanelMapNameText.text = loadMapDropdown.captionText.text;
     }
 
     public void LoadPanelCancelButton()
