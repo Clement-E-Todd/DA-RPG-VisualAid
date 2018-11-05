@@ -15,10 +15,9 @@ public class GMBattleMap : BattleMap
 
     private Transform cursorTransform;
     private Transform cursorTopTransform;
-    private int cursorHeight = 1;
+    private int cursorHeight = -1;
     private int cursorSlopeIndex = 0;
     private BattleMapData.TileData.Type cursorTileType = BattleMapData.TileData.Type.Grass;
-    private bool firstUpdateComplete = false;
 
     List<GameObject> cursorColumns = new List<GameObject>();
     private static GameObject cursorColumnPrefab;
@@ -72,8 +71,6 @@ public class GMBattleMap : BattleMap
         }
 
         SyncPlayerMapTransform();
-
-        firstUpdateComplete = true;
     }
 
     public void Save(string mapName)
@@ -158,6 +155,11 @@ public class GMBattleMap : BattleMap
         // Press the plus or minus keys to change the cursor height
         int previousCursorHeight = cursorHeight;
 
+        if (cursorHeight < 0)
+        {
+            cursorHeight = 1;
+        }
+
         if (Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.Equals))
         {
             cursorHeight++;
@@ -167,7 +169,7 @@ public class GMBattleMap : BattleMap
             cursorHeight--;
         }
 
-        if (cursorHeight != previousCursorHeight || !firstUpdateComplete)
+        if (cursorHeight != previousCursorHeight)
         {
             cursorTopTransform.localPosition = new Vector3(
                 cursorTopTransform.localPosition.x,
@@ -227,7 +229,7 @@ public class GMBattleMap : BattleMap
             cursorSlopeIndex = 7;
         }
 
-        if (cursorSlopeIndex != previousTopSpriteIndex || !firstUpdateComplete)
+        if (cursorSlopeIndex != previousTopSpriteIndex)
         {
             topSpriteObjects[previousTopSpriteIndex].SetActive(false);
             topSpriteObjects[cursorSlopeIndex].SetActive(true);
