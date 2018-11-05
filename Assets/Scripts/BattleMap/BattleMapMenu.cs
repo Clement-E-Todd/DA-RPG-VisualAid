@@ -23,6 +23,9 @@ public class BattleMapMenu : MonoBehaviour
 
     public InputField savePanelMapNameText;
 
+    public GameObject propPanel;
+    public GameObject propPanelButton;
+
     public void TogglePlayerMapButton()
     {
         playerMap.ToggleHidden();
@@ -103,6 +106,11 @@ public class BattleMapMenu : MonoBehaviour
         clearPanel.SetActive(false);
     }
 
+    public void TogglePropPanel()
+    {
+        propPanel.SetActive(!propPanel.activeSelf);
+    }
+
     public void OnModeSelected()
     {
         editModeButton.GetComponent<Image>().color = map.currentMode == GMBattleMap.Mode.Edit ? Color.cyan : Color.white;
@@ -110,5 +118,8 @@ public class BattleMapMenu : MonoBehaviour
 
         savePanel.SetActive(false);
         loadPanel.SetActive(false);
+
+        propPanel.SetActive(false);
+        propPanelButton.SetActive(map.currentMode == GMBattleMap.Mode.Prop);
     }
 }

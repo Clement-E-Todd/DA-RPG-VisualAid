@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
     {
         battleMap.ToggleHidden();
 
+        if (!battleMap.hidden)
+        {
+            battleMap.SetNoMode();
+        }
+
         if (!battleMap.playerMap.hidden)
         {
             battleMap.playerMap.ToggleHidden();
