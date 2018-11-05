@@ -12,7 +12,7 @@ public class BattleMapProp : MonoBehaviour
     Vector3 mouseDragStartPos;
 
     SpriteRenderer _spriteRenderer;
-    SpriteRenderer spriteRenderer
+    public SpriteRenderer spriteRenderer
     {
         get
         {
@@ -26,7 +26,7 @@ public class BattleMapProp : MonoBehaviour
     }
 
     BattleMapElement _battleMapElement;
-    BattleMapElement battleMapElement
+    public BattleMapElement battleMapElement
     {
         get
         {
@@ -71,12 +71,6 @@ public class BattleMapProp : MonoBehaviour
         dummyMapElement.alphaMultiplier = battleMapElement.alphaMultiplier;
 
         dummyProp.SetActive(visibleToPlayers);
-
-        BattleMapPropPanel propPanel = FindObjectOfType<BattleMapPropPanel>();
-        if (propPanel)
-        {
-            propPanel.OnPropSelected();
-        }
     }
 
     private void OnMouseDown()
@@ -89,6 +83,12 @@ public class BattleMapProp : MonoBehaviour
         selectedProp = this;
         propDragStartPos = transform.position;
         mouseDragStartPos = Input.mousePosition;
+
+        BattleMapPropPanel propPanel = FindObjectOfType<BattleMapPropPanel>();
+        if (propPanel)
+        {
+            propPanel.OnPropSelected();
+        }
     }
 
     private void OnMouseDrag()
