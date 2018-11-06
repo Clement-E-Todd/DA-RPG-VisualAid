@@ -25,7 +25,8 @@ public class BattleMapData
         public enum Type
         {
             Grass,
-            Dirt
+            Dirt,
+            Stone
         }
     }
 

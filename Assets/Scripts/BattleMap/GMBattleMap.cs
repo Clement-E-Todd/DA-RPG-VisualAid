@@ -248,6 +248,10 @@ public class GMBattleMap : BattleMap
         {
             cursorTileType = BattleMapData.TileData.Type.Dirt;
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            cursorTileType = BattleMapData.TileData.Type.Stone;
+        }
     }
 
     private void AddAndRemoveTiles()
