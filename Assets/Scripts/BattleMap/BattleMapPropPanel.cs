@@ -5,8 +5,6 @@ using System.Linq;
 
 public class BattleMapPropPanel : MonoBehaviour
 {
-    public GameObject propPrefab;
-
     public Text selectedPropNameText;
     public Toggle visibleToggle;
 
@@ -63,14 +61,10 @@ public class BattleMapPropPanel : MonoBehaviour
 
     public void OnAddButtonPressed()
     {
-        GameObject propObject = Instantiate(propPrefab);
-        propObject.name = addMenuPropDropdown.captionText.text;
-
-        BattleMapProp prop = propObject.GetComponent<BattleMapProp>();
-        prop.transform.SetParent(GMBattleMap.currentInstance.transform);
-
+        string propName = addMenuPropDropdown.captionText.text;
         string spritePath = addMenuOptions[addMenuCategoryDropdown.captionText.text][addMenuPropDropdown.captionText.text];
-        prop.spriteRenderer.sprite = Resources.Load<Sprite>(spritePath);
+
+        BattleMapProp prop = BattleMapProp.Create(propName, spritePath);
 
         BattleMapProp.selectedProp = prop;
         OnPropSelected();

@@ -99,7 +99,7 @@ public class BattleMapData
         return allTileData.ToArray();
     }
 
-    public void Save(string mapName)
+    public void Save(string mapName, BattleMapProp[] props)
     {
         EnsureDirectoryExists();
 
@@ -118,10 +118,26 @@ public class BattleMapData
             );
         }
 
+        if (props.Length > 0)
+        {
+            fileData.Add("PROPS");
+
+            foreach (BattleMapProp prop in props)
+            {
+                fileData.Add(
+                    "n'" + prop.name + "'" +
+                    "p'" + prop.spritePath + "'" +
+                    "x" + prop.transform.localPosition.x +
+                    "y" + prop.transform.localPosition.y +
+                    "v" + (prop.visibleToPlayers ? '1' : '0')
+                );
+            }
+        }
+
         File.WriteAllLines(filePath, fileData.ToArray());
     }
 
-    public void Load(string mapName)
+    public void Load(string mapName, bool loadProps)
     {
         EnsureDirectoryExists();
 
@@ -134,31 +150,85 @@ public class BattleMapData
         }
 
         string[] fileData = File.ReadAllLines(filePath);
+        bool loadingProps = false;
 
         tiles.Clear();
-        foreach (string tileString in fileData)
+        foreach (string dataEntry in fileData)
         {
-            string[] data = new string[5];
-            int dataIndex = -1;
-
-            for (int i = 0; i < tileString.Length; i++)
+            // Load data for a tile...
+            if (!loadingProps)
             {
-                if (char.IsDigit(tileString[i]) || tileString[i] == '-')
+                // Switch to prop mode if prompted
+                if (dataEntry == "PROPS")
                 {
-                    data[dataIndex] += tileString[i];
+                    if (loadProps)
+                    {
+                        loadingProps = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 else
                 {
-                    dataIndex++;
+                    string[] data = new string[5];
+                    int dataIndex = -1;
+
+                    for (int i = 0; i < dataEntry.Length; i++)
+                    {
+                        if (char.IsDigit(dataEntry[i]) || dataEntry[i] == '-')
+                        {
+                            data[dataIndex] += dataEntry[i];
+                        }
+                        else
+                        {
+                            dataIndex++;
+                        }
+                    }
+
+                    AddTile(new TileData(
+                                int.Parse(data[0]),
+                                int.Parse(data[1]),
+                                int.Parse(data[2]),
+                                (TileData.Type)int.Parse(data[3]),
+                                int.Parse(data[4])));
                 }
+
             }
 
-            AddTile(new TileData(
-                        int.Parse(data[0]),
-                        int.Parse(data[1]),
-                        int.Parse(data[2]),
-                        (TileData.Type)int.Parse(data[3]),
-                        int.Parse(data[4])));
+            // Load data for a prop and add it to the map...
+            else
+            {
+                string[] data = new string[5];
+                int dataIndex = -1;
+                bool stringMode = false;
+
+                for (int i = 0; i < dataEntry.Length; i++)
+                {
+                    if ((!stringMode && (char.IsDigit(dataEntry[i]) || dataEntry[i] == '-' || dataEntry[i] == '.')) ||
+                        (stringMode && dataEntry[i] != '\''))
+                    {
+                        data[dataIndex] += dataEntry[i];
+                    }
+                    else if (dataEntry[i] == '\'')
+                    {
+                        stringMode = !stringMode;
+                    }
+                    else
+                    {
+                        dataIndex++;
+                    }
+                }
+
+                BattleMapProp prop = BattleMapProp.Create(data[0], data[1]);
+                prop.transform.localPosition = new Vector3(
+                    float.Parse(data[2]),
+                    float.Parse(data[3]),
+                    0f);
+                prop.SetVisibleToPlayers(data[4] == "1");
+                Debug.Log("Loaded a " + prop.name + "!");
+            }
         }
     }
 

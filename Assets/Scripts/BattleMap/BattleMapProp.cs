@@ -11,6 +11,8 @@ public class BattleMapProp : MonoBehaviour
     Vector3 propDragStartPos;
     Vector3 mouseDragStartPos;
 
+    public string spritePath;
+
     SpriteRenderer _spriteRenderer;
     public SpriteRenderer spriteRenderer
     {
@@ -39,6 +41,35 @@ public class BattleMapProp : MonoBehaviour
         }
     }
 
+    static GameObject _propPrefab;
+    public static GameObject propPrefab
+    {
+        get
+        {
+            if (!_propPrefab)
+            {
+                _propPrefab = Resources.Load<GameObject>("Prefabs/Prop");
+            }
+
+            return _propPrefab;
+        }
+    }
+
+    public static BattleMapProp Create(string propName, string spritePath)
+    {
+        GameObject propObject = Instantiate(propPrefab);
+        propObject.name = propName;
+
+        BattleMapProp prop = propObject.GetComponent<BattleMapProp>();
+        prop.transform.SetParent(GMBattleMap.currentInstance.transform);
+        prop.transform.localScale = Vector3.one;
+
+        prop.spritePath = spritePath;
+        prop.spriteRenderer.sprite = Resources.Load<Sprite>(spritePath);
+
+        return prop;
+    }
+
     private void Start()
     {
         dummyProp = new GameObject(name);
@@ -58,19 +89,22 @@ public class BattleMapProp : MonoBehaviour
 
     private void SyncDummyToProp()
     {
-        dummyProp.transform.localPosition = transform.localPosition;
-        dummyProp.transform.localRotation = transform.localRotation;
-        dummyProp.transform.localScale = transform.localScale;
+        if (dummyProp)
+        {
+            dummyProp.transform.localPosition = transform.localPosition;
+            dummyProp.transform.localRotation = transform.localRotation;
+            dummyProp.transform.localScale = transform.localScale;
 
-        SpriteRenderer dummyRenderer = dummyProp.GetComponent<SpriteRenderer>();
-        dummyRenderer.sprite = spriteRenderer.sprite;
-        dummyRenderer.color = spriteRenderer.color;
-        dummyRenderer.sortingOrder = spriteRenderer.sortingOrder;
+            SpriteRenderer dummyRenderer = dummyProp.GetComponent<SpriteRenderer>();
+            dummyRenderer.sprite = spriteRenderer.sprite;
+            dummyRenderer.color = spriteRenderer.color;
+            dummyRenderer.sortingOrder = spriteRenderer.sortingOrder;
 
-        BattleMapElement dummyMapElement = dummyProp.GetComponent<BattleMapElement>();
-        dummyMapElement.alphaMultiplier = battleMapElement.alphaMultiplier;
+            BattleMapElement dummyMapElement = dummyProp.GetComponent<BattleMapElement>();
+            dummyMapElement.alphaMultiplier = battleMapElement.alphaMultiplier;
 
-        dummyProp.SetActive(visibleToPlayers);
+            dummyProp.SetActive(visibleToPlayers);
+        }
     }
 
     private void OnMouseDown()
