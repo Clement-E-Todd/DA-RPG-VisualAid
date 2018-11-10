@@ -99,13 +99,21 @@ public class BattleMapData
         return allTileData.ToArray();
     }
 
-    public void Save(string mapName, BattleMapProp[] props)
+    public void Save(string mapName, Transform mapTransform, BattleMapProp[] props)
     {
         EnsureDirectoryExists();
 
         string filePath = Application.persistentDataPath + "/BattleMaps/" + mapName + ".battleMap";
         List<string> fileData = new List<string>();
 
+        // Save map transform...
+        fileData.Add(
+            "x" + mapTransform.localPosition.x +
+            "y" + mapTransform.localPosition.y +
+            "s" + mapTransform.localScale.x
+        );
+
+        // Save tile data...
         TileData[] allTileData = GetAllTileData();
         foreach (TileData tile in allTileData)
         {
@@ -118,6 +126,7 @@ public class BattleMapData
             );
         }
 
+        // Svae prop data...
         if (props.Length > 0)
         {
             fileData.Add("PROPS");
@@ -137,7 +146,7 @@ public class BattleMapData
         File.WriteAllLines(filePath, fileData.ToArray());
     }
 
-    public void Load(string mapName, bool loadProps)
+    public void Load(string mapName, Transform mapTransform, bool loadProps)
     {
         EnsureDirectoryExists();
 
@@ -150,11 +159,48 @@ public class BattleMapData
         }
 
         string[] fileData = File.ReadAllLines(filePath);
+        bool mapTransformLoaded = false;
         bool loadingProps = false;
 
         tiles.Clear();
         foreach (string dataEntry in fileData)
         {
+            // The very first entry is the map's transform info...
+            if (!mapTransformLoaded)
+            {
+                string[] data = new string[3];
+                int dataIndex = -1;
+
+                for (int i = 0; i < dataEntry.Length; i++)
+                {
+                    if (char.IsDigit(dataEntry[i]) || dataEntry[i] == '-' || dataEntry[i] == '.')
+                    {
+                        if (dataIndex >= data.Length)
+                        {
+                            Debug.LogError("Error");
+                        }
+
+                        data[dataIndex] += dataEntry[i];
+                    }
+                    else
+                    {
+                        dataIndex++;
+                    }
+                }
+
+                mapTransform.localPosition = new Vector3(
+                    float.Parse(data[0]),
+                    float.Parse(data[1]),
+                    0f
+                );
+
+                float zoom = float.Parse(data[2]);
+                mapTransform.localScale = new Vector3(zoom, zoom, zoom);
+
+                mapTransformLoaded = true;
+                continue;
+            }
+
             // Load data for a tile...
             if (!loadingProps)
             {
@@ -227,7 +273,6 @@ public class BattleMapData
                     float.Parse(data[3]),
                     0f);
                 prop.SetVisibleToPlayers(data[4] == "1");
-                Debug.Log("Loaded a " + prop.name + "!");
             }
         }
     }

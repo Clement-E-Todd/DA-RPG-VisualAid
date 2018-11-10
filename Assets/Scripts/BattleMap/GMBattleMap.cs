@@ -79,13 +79,13 @@ public class GMBattleMap : BattleMap
 
     public void Save(string mapName)
     {
-        data.Save(mapName, GetComponentsInChildren<BattleMapProp>());
+        data.Save(mapName, transform, GetComponentsInChildren<BattleMapProp>());
     }
 
     public void Load(string mapName)
     {
-        data.Load(mapName, true);
-        playerMap.GetData().Load(mapName, false);
+        data.Load(mapName, transform, true);
+        playerMap.GetData().Load(mapName, playerMap.transform, false);
 
         RefreshTileViews();
         playerMap.RefreshTileViews();
