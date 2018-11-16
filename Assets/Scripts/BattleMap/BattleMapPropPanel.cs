@@ -20,6 +20,12 @@ public class BattleMapPropPanel : MonoBehaviour
             {
                 _addMenuOptions = new Dictionary<string, Dictionary<string, string>>();
 
+                Dictionary<string, string> playerCharacters = new Dictionary<string, string>();
+                playerCharacters.Add("MT", "Sprites/PropsAndCharacters/Player Characters/MT");
+                playerCharacters.Add("Albert-Alexandre (No Mask)", "Sprites/PropsAndCharacters/Player Characters/Albert-Alexandre (No Mask)");
+                playerCharacters.Add("TEST", "Sprites/PropsAndCharacters/Player Characters/TEST");
+                _addMenuOptions.Add("Player Characters", playerCharacters);
+
                 Dictionary<string, string> markings = new Dictionary<string, string>();
                 markings.Add("X", "Sprites/PropsAndCharacters/Markings/X");
                 markings.Add("Circle", "Sprites/PropsAndCharacters/Markings/circle");
