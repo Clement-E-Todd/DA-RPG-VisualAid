@@ -74,6 +74,25 @@ public class GMBattleMap : BattleMap
             cursorTransform.gameObject.SetActive(false);
         }
 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                SetEditMode();
+            }
+            else if (Input.GetKeyDown(KeyCode.P))
+            {
+                if (currentMode != Mode.Prop)
+                {
+                    SetPropMode();
+                }
+                else
+                {
+                    FindObjectOfType<BattleMapMenu>().TogglePropPanel();
+                }
+            }
+        }
+
         SyncPlayerMapTransform();
     }
 

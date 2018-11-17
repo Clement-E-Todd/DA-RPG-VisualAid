@@ -4868,7 +4868,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589b27a651bd205419ba949354d7f275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propPrefab: {fileID: 1748109655550476, guid: 3bcbe563c29b7114181a471208d42003, type: 2}
   selectedPropNameText: {fileID: 9327077}
   visibleToggle: {fileID: 1218152455}
   addMenuCategoryDropdown: {fileID: 1599569692}
@@ -9843,6 +9842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 715940528}
   - component: {fileID: 715940527}
+  - component: {fileID: 715940526}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: Untagged
@@ -9850,6 +9850,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &715940526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 715940525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7785d143475d545769f4910b394f948b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &715940527
 Camera:
   m_ObjectHideFlags: 0
@@ -23353,7 +23364,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10000
   m_Sprite: {fileID: 21300000, guid: 54cb61e14a9241e408ba8efa73ccff5a, type: 3}
-  m_Color: {r: 0.7783019, g: 1, b: 0.8003697, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

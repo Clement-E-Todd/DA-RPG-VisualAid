@@ -5,6 +5,14 @@ public class MainMenu : MonoBehaviour
     public GMBattleMap battleMap;
     public CharacterEditor characterEditor;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            ToggleBattleMap();
+        }
+    }
+
     public void ToggleBattleMap()
     {
         battleMap.ToggleHidden();
