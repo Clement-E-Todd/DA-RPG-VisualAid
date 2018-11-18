@@ -34,6 +34,10 @@ public class BattleMapPropPanel : MonoBehaviour
                 qunari.Add("Saarebas", "Sprites/PropsAndCharacters/Qunari/Qunari-Saarebas");
                 _addMenuOptions.Add("Qunari", qunari);
 
+                Dictionary<string, string> clanCispia = new Dictionary<string, string>();
+                clanCispia.Add("Caenum (Cloak)", "Sprites/PropsAndCharacters/Cispia/Caenum-Cloaked");
+                _addMenuOptions.Add("Clan Cispia", clanCispia);
+
                 Dictionary<string, string> markings = new Dictionary<string, string>();
                 markings.Add("X", "Sprites/PropsAndCharacters/Markings/X");
                 markings.Add("Circle", "Sprites/PropsAndCharacters/Markings/circle");
