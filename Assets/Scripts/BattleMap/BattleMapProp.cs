@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(BattleMapElement))]
 public class BattleMapProp : MonoBehaviour
 {
     public static BattleMapProp selectedProp = null;
@@ -12,6 +14,8 @@ public class BattleMapProp : MonoBehaviour
     Vector3 mouseDragStartPos;
 
     public string spritePath;
+
+    const int DEFAULT_SORT_ORDER = 30000;
 
     SpriteRenderer _spriteRenderer;
     public SpriteRenderer spriteRenderer
@@ -76,6 +80,9 @@ public class BattleMapProp : MonoBehaviour
         dummyProp.transform.SetParent(GMBattleMap.currentInstance.playerMap.transform);
         dummyProp.layer = GMBattleMap.currentInstance.playerMap.gameObject.layer;
 
+        int order = Mathf.Clamp(DEFAULT_SORT_ORDER - (int)(transform.localPosition.y * 10f), 27233, 32767);
+        spriteRenderer.sortingOrder = order;
+
         dummyProp.AddComponent<SpriteRenderer>();
         dummyProp.AddComponent<BattleMapElement>();
 
@@ -132,6 +139,10 @@ public class BattleMapProp : MonoBehaviour
             return;
         }
         transform.position = propDragStartPos + (Input.mousePosition - mouseDragStartPos) / 96f;
+
+        int order = Mathf.Clamp(DEFAULT_SORT_ORDER - (int)(transform.localPosition.y * 10f), 27233, 32767);
+        spriteRenderer.sortingOrder = order;
+
         SyncDummyToProp();
     }
 

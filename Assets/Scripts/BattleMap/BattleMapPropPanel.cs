@@ -21,11 +21,18 @@ public class BattleMapPropPanel : MonoBehaviour
                 _addMenuOptions = new Dictionary<string, Dictionary<string, string>>();
 
                 Dictionary<string, string> playerCharacters = new Dictionary<string, string>();
+                playerCharacters.Add("Margherita", "Sprites/PropsAndCharacters/Player Characters/Margherita");
                 playerCharacters.Add("Eden-Amari", "Sprites/PropsAndCharacters/Player Characters/Eden-Amari");
                 playerCharacters.Add("MT", "Sprites/PropsAndCharacters/Player Characters/MT");
                 playerCharacters.Add("Albert-Alexandre (No Mask)", "Sprites/PropsAndCharacters/Player Characters/Albert-Alexandre (No Mask)");
                 playerCharacters.Add("TEST", "Sprites/PropsAndCharacters/Player Characters/TEST");
                 _addMenuOptions.Add("Player Characters", playerCharacters);
+
+                Dictionary<string, string> qunari = new Dictionary<string, string>();
+                qunari.Add("Qunari (Male)", "Sprites/PropsAndCharacters/Qunari/Qunari-Male");
+                qunari.Add("Qunari (Female)", "Sprites/PropsAndCharacters/Qunari/Qunari-Female");
+                qunari.Add("Saarebas", "Sprites/PropsAndCharacters/Qunari/Qunari-Saarebas");
+                _addMenuOptions.Add("Qunari", qunari);
 
                 Dictionary<string, string> markings = new Dictionary<string, string>();
                 markings.Add("X", "Sprites/PropsAndCharacters/Markings/X");
