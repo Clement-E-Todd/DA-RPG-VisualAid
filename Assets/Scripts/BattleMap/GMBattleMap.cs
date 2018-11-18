@@ -114,6 +114,12 @@ public class GMBattleMap : BattleMap
 
     public void Clear()
     {
+        BattleMapProp[] props = FindObjectsOfType<BattleMapProp>();
+        for (int i = props.Length - 1; i >= 0; i--)
+        {
+            Destroy(props[i].gameObject);
+        }
+
         data.Clear();
         playerMap.GetData().Clear();
 

@@ -76,6 +76,7 @@ public class BattleMapMenu : MonoBehaviour
 
     public void LoadPanelLoadButton()
     {
+        map.Clear();
         map.Load(loadMapDropdown.captionText.text);
         loadPanel.SetActive(false);
         savePanelMapNameText.text = loadMapDropdown.captionText.text;
@@ -99,6 +100,7 @@ public class BattleMapMenu : MonoBehaviour
     {
         map.Clear();
         clearPanel.SetActive(false);
+        savePanelMapNameText.text = string.Empty;
     }
 
     public void ClearPanelCancelButton()
