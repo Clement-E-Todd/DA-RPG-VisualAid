@@ -26,7 +26,8 @@ public class BattleMapData
         {
             Grass,
             Dirt,
-            Stone
+            Stone,
+            Wood
         }
     }
 
