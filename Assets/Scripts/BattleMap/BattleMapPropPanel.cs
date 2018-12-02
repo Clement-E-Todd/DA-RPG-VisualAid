@@ -24,6 +24,7 @@ public class BattleMapPropPanel : MonoBehaviour
                 playerCharacters.Add("Margherita", "Sprites/PropsAndCharacters/Player Characters/Margherita");
                 playerCharacters.Add("Eden-Amari", "Sprites/PropsAndCharacters/Player Characters/Eden-Amari");
                 playerCharacters.Add("MT", "Sprites/PropsAndCharacters/Player Characters/MT");
+                playerCharacters.Add("Albert-Alexandre", "Sprites/PropsAndCharacters/Player Characters/Albert-Alexandre");
                 playerCharacters.Add("Albert-Alexandre (No Mask)", "Sprites/PropsAndCharacters/Player Characters/Albert-Alexandre (No Mask)");
                 playerCharacters.Add("TEST", "Sprites/PropsAndCharacters/Player Characters/TEST");
                 _addMenuOptions.Add("Player Characters", playerCharacters);
