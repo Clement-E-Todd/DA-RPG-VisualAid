@@ -26,7 +26,6 @@ public class BattleMapPropPanel : MonoBehaviour
                 playerCharacters.Add("MT", "Sprites/PropsAndCharacters/Player Characters/MT");
                 playerCharacters.Add("Albert-Alexandre", "Sprites/PropsAndCharacters/Player Characters/Albert-Alexandre");
                 playerCharacters.Add("Albert-Alexandre (No Mask)", "Sprites/PropsAndCharacters/Player Characters/Albert-Alexandre (No Mask)");
-                playerCharacters.Add("TEST", "Sprites/PropsAndCharacters/Player Characters/TEST");
                 _addMenuOptions.Add("Player Characters", playerCharacters);
 
                 Dictionary<string, string> qunari = new Dictionary<string, string>();
@@ -34,6 +33,15 @@ public class BattleMapPropPanel : MonoBehaviour
                 qunari.Add("Qunari (Female)", "Sprites/PropsAndCharacters/Qunari/Qunari-Female");
                 qunari.Add("Saarebas", "Sprites/PropsAndCharacters/Qunari/Qunari-Saarebas");
                 _addMenuOptions.Add("Qunari", qunari);
+
+                Dictionary<string, string> demons = new Dictionary<string, string>();
+                demons.Add("Rage Demon", "Sprites/PropsAndCharacters/Demons/RageDemon");
+                _addMenuOptions.Add("Demons", demons);
+
+                Dictionary<string, string> darkspawn = new Dictionary<string, string>();
+                darkspawn.Add("Genlock", "Sprites/PropsAndCharacters/Darkspawn/Genlock");
+                darkspawn.Add("Genlock Alpha", "Sprites/PropsAndCharacters/Darkspawn/GenlockAlpha");
+                _addMenuOptions.Add("Darkspawn", darkspawn);
 
                 Dictionary<string, string> clanCispia = new Dictionary<string, string>();
                 clanCispia.Add("Caenum (Cloak)", "Sprites/PropsAndCharacters/Cispia/Caenum-Cloaked");
