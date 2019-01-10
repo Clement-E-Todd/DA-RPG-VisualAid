@@ -277,6 +277,10 @@ public class GMBattleMap : BattleMap
         {
             cursorTileType = BattleMapData.TileData.Type.Stone;
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            cursorTileType = BattleMapData.TileData.Type.Wood;
+        }
     }
 
     private void AddAndRemoveTiles()

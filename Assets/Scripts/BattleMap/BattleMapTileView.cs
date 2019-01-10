@@ -60,6 +60,11 @@ public class BattleMapTileView : MonoBehaviour
                 topSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Hex" + slope + "_Stone");
                 columnSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Column_Brick");
                 break;
+
+            case BattleMapData.TileData.Type.Wood:
+                topSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Hex" + slope + "_Wood");
+                columnSprite = Resources.Load<Sprite>("Sprites/BattleMapTiles/Column_Wood");
+                break;
         }
     }
 }
