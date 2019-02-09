@@ -39,6 +39,7 @@ public class BattleMapPropPanel : MonoBehaviour
                 _addMenuOptions.Add("Demons", demons);
 
                 Dictionary<string, string> darkspawn = new Dictionary<string, string>();
+                darkspawn.Add("Ogre", "Sprites/PropsAndCharacters/Darkspawn/Ogre");
                 darkspawn.Add("Genlock", "Sprites/PropsAndCharacters/Darkspawn/Genlock");
                 darkspawn.Add("Genlock Alpha", "Sprites/PropsAndCharacters/Darkspawn/GenlockAlpha");
                 _addMenuOptions.Add("Darkspawn", darkspawn);
